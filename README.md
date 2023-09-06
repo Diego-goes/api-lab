@@ -48,6 +48,10 @@ http://localhost:8000/users/read/id
 http://localhost:8000/users/update/id
 - Rota para deletar os dados de um usuário: 
 http://localhost:8000/users/delete/id
+- Rota para ativar um usuário: 
+http://localhost:8000/users/ativar/id
+- Rota para inativar um usuário: 
+http://localhost:8000/users/inativar/id
 
 CRUD Lab:
 - Rota para ver laboratórios: 
@@ -60,6 +64,10 @@ http://localhost:8000/labs/read/id
 http://localhost:8000/labs/update/id
 - Rota para deletar os dados de um laboratório: 
 http://localhost:8000/labs/delete/id
+- Rota para ativar um laboratório: 
+http://localhost:8000/labs/ativar/id
+- Rota para inativar um laboratório: 
+http://localhost:8000/labs/inativar/id
 
 Rota de Reservar Laboratório:
 - Rota para ver reservas: 
