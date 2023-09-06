@@ -16,6 +16,10 @@ def login(request):
             # Tenta encontrar um usuário com o email fornecido
             usuario = User.objects.get(email=email)
 
+            if usuario.is_active == 0:
+                return Response(
+                    {"Não foi possível realizar o login, pois o usuário está inativo."}
+                )
             # Verifica se a senha fornecida corresponde à senha armazenada no banco de dados
             if password == usuario.password:
                 # Senha correta, você pode fazer algo com o usuário agora
@@ -23,6 +27,7 @@ def login(request):
                     {"mensagem": "Login bem-sucedido", "usuario_id": usuario.id}
                 )
             else:
+
                 return Response({"mensagem": "Senha incorreta"})
 
         except User.DoesNotExist:
