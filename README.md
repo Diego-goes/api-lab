@@ -4,8 +4,13 @@
 
 Certifique-se de ter as seguintes ferramentas instaladas no seu sistema:
 
-- [Docker](https://www.docker.com/)
-- [Docker Compose](https://docs.docker.com/compose/)
+- Python installed 
+- Docker installed and running
+- Django 3.2.5
+- DjangoRestFramework 3.12.4
+- Psycopg2-binary 2.9.1
+
+(Optional): Postman and Tableplus to follow along, but any testing tool will work
 
 ## Configuração
 
