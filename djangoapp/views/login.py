@@ -32,4 +32,4 @@ def login(request):
         except User.DoesNotExist:
             return Response({"mensagem": "Usuário não encontrado"})
     else:
-        return Response({"mensagem": 'Campos "cpf_cnpj" e "password" são obrigatórios'})
+        return Response({"mensagem": "Campos 'cpf_cnpj' e 'password' são obrigatórios"})
