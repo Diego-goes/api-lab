@@ -20,11 +20,24 @@ def getLab(request, pk):
 
 @api_view(["POST"])
 def addLab(request):
-    serializer = LabSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-    return Response(serializer.data)
+    dados = request.data
+    if "andar" in dados and "lab" in dados:
+        andar = dados["andar"]
+        lab = dados["lab"]
 
+        try:
+            if Lab.objects.filter(andar=andar).exists():
+                return Response({f"O Lab tem já está registrado no andar {andar}."})
+            
+        except Lab.DoesNotExist:
+            return Response({"Laboratório não encontrado."})
+
+        serializer = LabSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+        return Response(serializer.data)
+    else:
+        return Response({"mensagem": "Existem campos faltando."})
 
 @api_view(["POST"])
 def inativarLab(request, pk):
