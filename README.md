@@ -17,8 +17,8 @@ Certifique-se de ter as seguintes ferramentas instaladas no seu sistema:
 1. Clone este repositório para o seu sistema:
 
    ```bash
-   git clone https://github.com/seu-usuario/seu-projeto-django.git
-   cd seu-projeto-django
+   git clone https://github.com/Diego-goes/api-lab.git
+   cd api-lab
    
 2. Crie um arquivo .env na raiz do projeto e configure as variáveis de ambiente necessárias, como chaves secretas, configurações de banco de dados, etc.
 
