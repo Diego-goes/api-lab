@@ -1,4 +1,4 @@
-# Meu Projeto Sistema de Reservas Laboratorial
+# Sistema de Reservas Laboratorial
 
 ## Pré-requisitos
 
