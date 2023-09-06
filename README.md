@@ -29,7 +29,7 @@ Certifique-se de ter as seguintes ferramentas instaladas no seu sistema:
 1. Execute o seguinte comando para iniciar o projeto:
 
     ```bash
-    docker-compose up -d
+    reload.bat
 
 Isso iniciará os contêineres Docker para o seu projeto Django e suas dependências. Você pode verificar se a aplicação está em execução acessando http://localhost:8000 no seu navegador.
 
