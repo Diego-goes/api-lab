@@ -7,14 +7,13 @@ from ..models import User
 def login(request):
     dados = request.data
 
-    # Verifica se os campos "email" e "password" existem no JSON
-    if "email" in dados and "password" in dados:
-        email = dados["email"]
+    if "cpf_cnpj" in dados and "password" in dados:
+        cpf_cnpj = dados["cpf_cnpj"]
         password = dados["password"]
 
         try:
             # Tenta encontrar um usuário com o email fornecido
-            usuario = User.objects.get(email=email)
+            usuario = User.objects.get(cpf_cnpj=cpf_cnpj)
 
             if usuario.is_active == 0:
                 return Response(
@@ -33,4 +32,4 @@ def login(request):
         except User.DoesNotExist:
             return Response({"mensagem": "Usuário não encontrado"})
     else:
-        return Response({"mensagem": 'Campos "email" e "password" são obrigatórios'})
+        return Response({"mensagem": 'Campos "cpf_cnpj" e "password" são obrigatórios'})
