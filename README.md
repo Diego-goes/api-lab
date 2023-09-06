@@ -40,23 +40,23 @@ Rotas configuradas da API:
 CRUD User:
 - Rota para ver usuários: http://localhost:8000/users/
 - Rota para registrar novos usuários: http://localhost:8000/users/create
-- Rota para exibir os dados de um usuário: http://localhost:8000/users/read/<int:id>
-- Rota para sobrescrever os dados de um usuário: http://localhost:8000/users/update/<int:id>
-- Rota para deletar os dados de um usuário: http://localhost:8000/users/delete/<int:id>
+- Rota para exibir os dados de um usuário: http://localhost:8000/users/read/id
+- Rota para sobrescrever os dados de um usuário: http://localhost:8000/users/update/id
+- Rota para deletar os dados de um usuário: http://localhost:8000/users/delete/id
 
 CRUD Lab:
 - Rota para ver laboratórios: http://localhost:8000/labs/
 - Rota para registrar novos laboratórios: http://localhost:8000/labs/create
-- Rota para exibir os dados de um laboratório: http://localhost:8000/labs/read/<int:id>
-- Rota para sobrescrever os dados de um laboratório: http://localhost:8000/labs/update/<int:id>
-- Rota para deletar os dados de um laboratório: http://localhost:8000/labs/delete/<int:id>
+- Rota para exibir os dados de um laboratório: http://localhost:8000/labs/read/id
+- Rota para sobrescrever os dados de um laboratório: http://localhost:8000/labs/update/id
+- Rota para deletar os dados de um laboratório: http://localhost:8000/labs/delete/id
 
 Rota de Reservar Laboratório:
 - Rota para ver reservas: http://localhost:8000/reslabs/
 - Rota para registrar novas reservas: http://localhost:8000/reslabs/create
-- Rota para exibir os dados de uma reserva: http://localhost:8000/reslabs/read/<int:id>
-- Rota para sobrescrever os dados de uma reserva: http://localhost:8000/reslabs/update/<int:id>
-- Rota para deletar os dados de uma reserva: http://localhost:8000/reslabs/delete/<int:id>
+- Rota para exibir os dados de uma reserva: http://localhost:8000/reslabs/read/id
+- Rota para sobrescrever os dados de uma reserva: http://localhost:8000/reslabs/update/id
+- Rota para deletar os dados de uma reserva: http://localhost:8000/reslabs/delete/id
 
 Rota de login:
 http://localhost:8000/login/
