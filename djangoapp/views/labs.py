@@ -26,6 +26,34 @@ def addLab(request):
     return Response(serializer.data)
 
 
+@api_view(["POST"])
+def inativarLab(request, pk):
+    try:
+        lab = Lab.objects.get(id=pk)
+        if lab.is_active == 1:
+            lab.is_active = 0
+            lab.save()
+            return Response({f"Lab inativado com sucesso!"})
+        else:
+            return Response({f"Lab ja estava inativado!"})
+    except Lab.DoesNotExist:
+        return Response({"Laboratório não encontrado"})
+
+
+@api_view(["POST"])
+def ativarLab(request, pk):
+    try:
+        lab = Lab.objects.get(id=pk)
+        if lab.is_active == 0:
+            lab.is_active = 1
+            lab.save()
+            return Response({"Lab ativado com sucesso!"})
+        else:
+            return Response({"Lab ja estava ativado!"})
+    except Lab.DoesNotExist:
+        return Response({"Laboratório não encontrado"})
+
+
 @api_view(["PUT"])
 def updateLab(request, pk):
     lab = Lab.objects.get(id=pk)
