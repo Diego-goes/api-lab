@@ -10,7 +10,7 @@ Certifique-se de ter as seguintes ferramentas instaladas no seu sistema:
 - DjangoRestFramework 3.12.4
 - Psycopg2-binary 2.9.1
 
-(Optional): Postman and Tableplus to follow along, but any testing tool will work
+(Opcional): Postman e Tableplus para testes.
 
 ## Configuração
 
