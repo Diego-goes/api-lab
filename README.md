@@ -86,7 +86,7 @@ http://localhost:8000/login/
 
 Aceita um JSON seguindo o modelo:
     {
-        "cpf_cnpj":"12312312312",,
+        "cpf_cnpj":"12312312312",
         "password": "Password"
     }
 
