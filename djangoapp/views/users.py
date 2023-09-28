@@ -3,7 +3,6 @@ from rest_framework.decorators import api_view
 from ..models import User
 from ..serializers import UserSerializer
 
-
 @api_view(["GET"])
 def getData(request):
     users = User.objects.all()
@@ -24,7 +23,7 @@ def addUser(request):
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)
-
+    
 
 @api_view(["POST"])
 def inativarUser(request, pk):

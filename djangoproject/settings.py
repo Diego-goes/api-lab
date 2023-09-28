@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 import os
 from pathlib import Path
-
+from datetime import timedelta
+import rest_framework_simplejwt
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,7 +22,7 @@ from pathlib import Path
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY","$+p%17b-¨KMcy_F&¨hLhL_BR3U%21J!cbRwe3npYZ7(9+bH¨bqcQQ9!OALKC")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.getenv("DEBUG", 0)))
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "djangoapp",
     "rest_framework",
+    "rest_framework_simplejwt",
 ]
 
 MIDDLEWARE = [
@@ -54,6 +56,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # "djangoapp.middleware.JWTAuthenticationMiddleware",
 ]
 
 ROOT_URLCONF = "djangoproject.urls"
@@ -94,7 +97,12 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
+# AUTH_USER_MODEL = 'djangoapp.User'
+
 AUTH_PASSWORD_VALIDATORS = [
+    # {
+    #     "NAME": "django.contrib.auth.backends.ModelBackend",
+    # },
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
@@ -108,6 +116,26 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
+#     ],
+# }
+
+# SIMPLE_JWT = {
+#     # 'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+#     # 'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+#     # 'SLIDING_TOKEN_LIFETIME': timedelta(days=1),
+#     # 'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=7),
+#     # 'SLIDING_TOKEN_LIFETIME': timedelta(days=7),
+#     # 'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=14),
+#     'ALGORITHM': os.getenv('JWT_ALGORITHM','CHANGE_ME'),
+#     'SIGNING_KEY': os.getenv('JWT_SECRET_KEY','CHANGE_ME'),
+# }
+# AUTHENTICATION_CLASSES = (
+#     'rest_framework_simplejwt.authentication.JWTAuthentication',
+# )
 
 
 # Internationalization

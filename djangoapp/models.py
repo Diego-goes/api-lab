@@ -1,9 +1,10 @@
 from django.db import models
 from datetime import datetime
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class User(models.Model):
-    name = models.CharField(max_length=250)
+    username = models.CharField(max_length=250,default='', unique=True)
     email = models.CharField(max_length=250)
     user_type_id = models.IntegerField(default=0)
     password = models.CharField(
