@@ -33,13 +33,13 @@ def decode_token(token):
 
 
 @api_view(["GET"])
-# @permission_classes([Professor])
+@permission_classes([Professor])
 def getData(request):
-    token = request.META.get("HTTP_AUTHORIZATION").split("Bearer ")[1]
-    token = token.replace('"', '')
-    print(f'TOKEN: {token}')
-    payload = decode_token(token)
-    print(request.user)
+    # token = request.META.get("HTTP_AUTHORIZATION").split("Bearer ")[1]
+    # token = token.replace('"', '')
+    # print(f'TOKEN: {token}')
+    # payload = decode_token(token)
+    # print(request.user)
     labs = Lab.objects.all()
     serializer = LabSerializer(labs, many=True)
     return Response(serializer.data)
