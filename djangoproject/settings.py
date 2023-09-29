@@ -55,7 +55,7 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
-    # "djangoapp.middleware.JWTAuthenticationMiddleware",
+    "djangoapp.middleware.JWTAuthenticationMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
@@ -97,7 +97,7 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
-# AUTH_USER_MODEL = 'djangoapp.User'
+AUTH_USER_MODEL = 'djangoapp.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     # {

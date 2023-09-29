@@ -4,8 +4,8 @@ from django.contrib.auth.models import AbstractBaseUser
 
 # Create your models here.
 class User(AbstractBaseUser):
-    # name = models.CharField(max_length=250)
-    name = models.CharField(max_length=250,default='', unique=False)
+    username = models.CharField(max_length=250,default='', unique=True)
+    name = models.CharField(max_length=250)
     email = models.CharField(max_length=250)
     user_type_id = models.IntegerField(default=0)
     password = models.CharField(
@@ -14,7 +14,7 @@ class User(AbstractBaseUser):
     is_active = models.IntegerField(default=0)
     cpf_cnpj = models.CharField(max_length=14, unique=True)
     phone = models.CharField(max_length=10)
-
+    USERNAME_FIELD = 'username'
 
 class Lab(models.Model):
     andar = models.IntegerField(default=1)
