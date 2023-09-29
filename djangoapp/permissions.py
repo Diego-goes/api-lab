@@ -8,3 +8,10 @@ class Professor(permissions.BasePermission):
         if payload and payload["user_type_id"] == 1:
             # print(request.auth_payload)
             return True
+
+class Admin(permissions.BasePermission):
+    def has_object_permission(self, request, view):
+        payload = request.auth_payload
+        if payload and payload["user_type_id"] == 0:
+            # print(request.auth_payload)
+            return True

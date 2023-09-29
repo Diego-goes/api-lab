@@ -1,9 +1,12 @@
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from ..permissions import Professor, Admin
+from rest_framework.permissions import AllowAny
 from ..models import User
 from ..serializers import UserSerializer
 
 @api_view(["GET"])
+@permission_classes([AllowAny])
 def getData(request):
     users = User.objects.all()
     serializer = UserSerializer(users, many=True)
@@ -11,6 +14,7 @@ def getData(request):
 
 
 @api_view(["GET"])
+@permission_classes([AllowAny])
 def getUser(request, pk):
     users = User.objects.get(id=pk)
     serializer = UserSerializer(users, many=False)
@@ -18,6 +22,7 @@ def getUser(request, pk):
 
 
 @api_view(["POST"])
+@permission_classes([AllowAny])
 def addUser(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
@@ -26,6 +31,7 @@ def addUser(request):
     
 
 @api_view(["POST"])
+@permission_classes([AllowAny])
 def inativarUser(request, pk):
     try:
         user = User.objects.get(id=pk)
@@ -40,6 +46,7 @@ def inativarUser(request, pk):
 
 
 @api_view(["POST"])
+@permission_classes([AllowAny])
 def ativarUser(request, pk):
     try:
         user = User.objects.get(id=pk)
@@ -54,6 +61,7 @@ def ativarUser(request, pk):
 
 
 @api_view(["PUT"])
+@permission_classes([AllowAny])
 def updateUser(request, pk):
     user = User.objects.get(id=pk)
     serializer = UserSerializer(instance=user, data=request.data)
@@ -63,6 +71,7 @@ def updateUser(request, pk):
 
 
 @api_view(["DELETE"])
+@permission_classes([AllowAny])
 def deleteUser(request, pk):
     user = User.objects.get(id=pk)
     user.delete()

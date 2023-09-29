@@ -30,7 +30,7 @@ class JWTAuthenticationMiddleware:
                     # Defina o usuário autenticado no objeto de solicitação
                     request.auth_payload = payload
                     request.user = User.objects.get(id=payload["user_id"])
-                    print(request.__dict__)
+                    # print(request.__dict__)
                 except jwt.ExpiredSignatureError:
                     return AuthenticationFailed("Token expirado. Faça login novamente.")
                 except jwt.DecodeError:
