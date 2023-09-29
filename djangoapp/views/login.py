@@ -4,11 +4,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework import status
 from ..models import User
 from django.conf import settings
-<<<<<<< HEAD
-from datetime import datetime
-=======
 from datetime import datetime, timedelta
->>>>>>> 664b05a (Tentativa promissora)
 
 
 # from rest_framework_simplejwt.tokens import RefreshToken
@@ -16,12 +12,7 @@ import jwt
 
 
 def gera_token(user):
-<<<<<<< HEAD
-    data_expiracao = datetime(2023, 9, 26)
-    exp_timestamp = int(data_expiracao.timestamp())
-=======
     exp_timestamp = datetime.now() + timedelta(days=7)
->>>>>>> 664b05a (Tentativa promissora)
     # Defina as informações que deseja incluir no payload (carga útil) do JWT
     payload = {
         'user_id': user.id,
@@ -92,8 +83,4 @@ def login(request):
         return Response(
             {"mensagem": "Campos 'cpf_cnpj' e 'password' são obrigatórios"},
             status=status.HTTP_400_BAD_REQUEST,
-<<<<<<< HEAD
         )
-=======
-        )
->>>>>>> 664b05a (Tentativa promissora)

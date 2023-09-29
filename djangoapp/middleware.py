@@ -31,8 +31,4 @@ class JWTAuthenticationMiddleware:
                     return AuthenticationFailed('Token inválido. Faça login novamente.')
 
         response = self.get_response(request)
-<<<<<<< HEAD
         return response
-=======
-        return response
->>>>>>> 664b05a (Tentativa promissora)

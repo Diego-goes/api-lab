@@ -23,10 +23,6 @@ import rest_framework_simplejwt
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY","$+p%17b-¨KMcy_F&¨hLhL_BR3U%21J!cbRwe3npYZ7(9+bH¨bqcQQ9!OALKC")
-<<<<<<< HEAD
-=======
-
->>>>>>> 664b05a (Tentativa promissora)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.getenv("DEBUG", 0)))
@@ -61,7 +57,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     # "djangoapp.middleware.JWTAuthenticationMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # "djangoapp.middleware.JWTAuthenticationMiddleware",
 ]
 
 ROOT_URLCONF = "djangoproject.urls"
@@ -122,27 +117,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-<<<<<<< HEAD
-# REST_FRAMEWORK = {
-#     'DEFAULT_AUTHENTICATION_CLASSES': [
-#         'rest_framework_simplejwt.authentication.JWTAuthentication',
-#     ],
-# }
-
-# SIMPLE_JWT = {
-#     # 'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
-#     # 'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
-#     # 'SLIDING_TOKEN_LIFETIME': timedelta(days=1),
-#     # 'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=7),
-#     # 'SLIDING_TOKEN_LIFETIME': timedelta(days=7),
-#     # 'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=14),
-#     'ALGORITHM': os.getenv('JWT_ALGORITHM','CHANGE_ME'),
-#     'SIGNING_KEY': os.getenv('JWT_SECRET_KEY','CHANGE_ME'),
-# }
-# AUTHENTICATION_CLASSES = (
-#     'rest_framework_simplejwt.authentication.JWTAuthentication',
-# )
-=======
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -162,7 +136,6 @@ SIMPLE_JWT = {
 AUTHENTICATION_CLASSES = (
     'rest_framework_simplejwt.authentication.JWTAuthentication',
 )
->>>>>>> 664b05a (Tentativa promissora)
 
 
 # Internationalization

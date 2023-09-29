@@ -1,18 +1,11 @@
 from django.db import models
 from datetime import datetime
-<<<<<<< HEAD
-from django.contrib.auth.models import AbstractUser
-
-# Create your models here.
-class User(models.Model):
-    username = models.CharField(max_length=250,default='', unique=True)
-=======
 from django.contrib.auth.models import AbstractBaseUser
 
 # Create your models here.
 class User(AbstractBaseUser):
-    name = models.CharField(max_length=250)
->>>>>>> 664b05a (Tentativa promissora)
+    # name = models.CharField(max_length=250)
+    username = models.CharField(max_length=250,default='', unique=True)
     email = models.CharField(max_length=250)
     user_type_id = models.IntegerField(default=0)
     password = models.CharField(
