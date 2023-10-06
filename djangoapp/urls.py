@@ -1,8 +1,10 @@
 from django.urls import path
-from .views import labs, users, resLabs, login
+from .views import labs, users, resLabs, login, inicio
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
+    # Inicio
+    path("", inicio.exibirUrls),
     # User - Privado individualmente alunos e professores
     path("users/", users.getData),
     path("users/create", users.addUser),

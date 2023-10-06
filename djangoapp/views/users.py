@@ -20,15 +20,17 @@ def getUser(request, pk):
         serializer = UserSerializer(user, many=False)
         return Response(serializer.data)
     except User.DoesNotExist:
-        return Response({"message": "User não encontrado"}, status=404)  # Retorna uma resposta de erro com status 404
+        return Response({"message": "Usuário não encontrado"}, status=404)  # Retorna uma resposta de erro com status 404
 
 @api_view(["POST"])
-@permission_classes([AllowAny])
+@permission_classes([Admin])
 def addUser(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
-    return Response(serializer.data)
+        return Response({"message": "Usuário criado com sucesso!"}, status=200)
+    else:
+        return Response({"message": "Não foi possível criar o usuário, revise os campos e tente novamente!"}, status=404)
 
 @api_view(["POST"])
 @permission_classes([PodeEditarPerfil])
@@ -38,11 +40,11 @@ def inativarUser(request, pk):
         if user.is_active == 1:
             user.is_active = 0
             user.save()
-            return Response({"message": "User inativado com sucesso!"})
+            return Response({"message": "Usuário inativado com sucesso!"})
         else:
-            return Response({"message": "User já estava inativado!"})
+            return Response({"message": "Usuário já estava inativado!"})
     except User.DoesNotExist:
-        return Response({"message": "User não encontrado"}, status=404)  # Retorna uma resposta de erro com status 404
+        return Response({"message": "Usuário não encontrado"}, status=404)  # Retorna uma resposta de erro com status 404
 
 @api_view(["POST"])
 @permission_classes([Admin])
@@ -52,11 +54,11 @@ def ativarUser(request, pk):
         if user.is_active == 0:
             user.is_active = 1
             user.save()
-            return Response({"message": "User ativado com sucesso!"})
+            return Response({"message": "Usuário ativado com sucesso!"})
         else:
-            return Response({"message": "User já estava ativado!"})
+            return Response({"message": "Usuário já estava ativado!"})
     except User.DoesNotExist:
-        return Response({"message": "User não encontrado"}, status=404)  # Retorna uma resposta de erro com status 404
+        return Response({"message": "Usuário não encontrado"}, status=404)  # Retorna uma resposta de erro com status 404
 
 @api_view(["PUT"])
 @permission_classes([PodeEditarPerfil])
@@ -68,7 +70,7 @@ def updateUser(request, pk):
             serializer.save()
         return Response(serializer.data)
     except User.DoesNotExist:
-        return Response({"message": "User não encontrado"}, status=404)  # Retorna uma resposta de erro com status 404
+        return Response({"message": "Usuário não encontrado"}, status=404)  # Retorna uma resposta de erro com status 404
 
 @api_view(["DELETE"])
 @permission_classes([Admin])
@@ -76,6 +78,6 @@ def deleteUser(request, pk):
     try:
         user = User.objects.get(id=pk)
         user.delete()
-        return Response("User successfully deleted!")
+        return Response("Usuário successfully deleted!")
     except User.DoesNotExist:
-        return Response({"message": "User não encontrado"}, status=404)  # Retorna uma resposta de erro com status 404
+        return Response({"message": "Usuário não encontrado"}, status=404)  # Retorna uma resposta de erro com status 404

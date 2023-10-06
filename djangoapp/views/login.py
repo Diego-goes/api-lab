@@ -38,7 +38,6 @@ def gera_token(user):
 @permission_classes([AllowAny])
 def login(request):
     dados = request.data
-
     if "cpf_cnpj" in dados and "password" in dados:
         cpf_cnpj = dados["cpf_cnpj"]
         password = dados["password"]

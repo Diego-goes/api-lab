@@ -1,18 +1,23 @@
 import jwt
 from rest_framework.exceptions import AuthenticationFailed
+from django.http import JsonResponse
 from django.conf import settings
 from .models import User
-
 
 def decode_token(token):
     secret_key = settings.SIMPLE_JWT["SIGNING_KEY"]
     algorithm = settings.SIMPLE_JWT["ALGORITHM"]
-    payload = jwt.decode(token, secret_key, algorithms=[algorithm])
-    return payload
+    try:
+        payload = jwt.decode(token, secret_key, algorithms=[algorithm])
+        return payload
+    except jwt.ExpiredSignatureError:
+        return None
+    except jwt.DecodeError:
+        return None
 
 def get_token(header):
     token = header.split("Bearer ")[1]
-    token = token.replace('"', "")  
+    token = token.replace('"', "")
     return token
 
 class JWTAuthenticationMiddleware:
@@ -20,21 +25,17 @@ class JWTAuthenticationMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        # Obtenha o token do cabeçalho da solicitação
         authorization_header = request.META.get("HTTP_AUTHORIZATION")
         if authorization_header:
             token = get_token(authorization_header)
             if token:
-                try:
-                    payload = decode_token(token)
-                    # Defina o usuário autenticado no objeto de solicitação
+                payload = decode_token(token)
+                if payload:
                     request.auth_payload = payload
                     request.user = User.objects.get(id=payload["user_id"])
-                    # print(request.__dict__)
-                except jwt.ExpiredSignatureError:
-                    return AuthenticationFailed("Token expirado. Faça login novamente.")
-                except jwt.DecodeError:
-                    return AuthenticationFailed("Token inválido. Faça login novamente.")
+                else:
+                    error_message = "Token invalido ou expirado."
+                    return JsonResponse({"error": error_message}, status=401)
 
         response = self.get_response(request)
         return response
