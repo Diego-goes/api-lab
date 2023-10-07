@@ -23,7 +23,7 @@ def getUser(request, pk):
         return Response({"message": "Usuário não encontrado"}, status=404)  # Retorna uma resposta de erro com status 404
 
 @api_view(["POST"])
-@permission_classes([Admin])
+@permission_classes([AllowAny])
 def addUser(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():

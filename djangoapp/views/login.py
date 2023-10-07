@@ -73,7 +73,6 @@ def login(request):
                 return Response(
                     {"mensagem": "Senha incorreta"}, status=status.HTTP_401_UNAUTHORIZED
                 )
-
         except User.DoesNotExist:
             return Response(
                 {"mensagem": "Usuário não encontrado"}, status=status.HTTP_404_NOT_FOUND

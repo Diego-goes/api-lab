@@ -23,11 +23,7 @@ class Lab(models.Model):
     description = models.TextField()
 
 
-# class Lab(models.Model):
 class ResLab(models.Model):
-    # Está apresentando erro nos FK
-    nome = models.CharField(max_length=250, default = '')
-    id_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    # id_lab = models.ForeignKey(Lab, on_delete=models.CASCADE)
-    # res_date = models.DateTimeField(default=datetime.now)
-    # res_date = models.DateTimeField()
+    id_user = models.ForeignKey(User, on_delete=models.CASCADE, default = 0)
+    id_lab = models.ForeignKey(Lab, on_delete=models.CASCADE, default = 0)
+    res_date = models.DateTimeField(default=datetime.now)
