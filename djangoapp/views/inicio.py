@@ -90,6 +90,12 @@ routes = [
         "url": "labs/update/<str:pk>",
         "methods": ["PUT"],
         "authorization": "Bearer (token)",
+        "body": {
+            "andar": "int",
+            "lab": "string",
+            "description": "string",
+            "is_active": "int"
+            }
     },
     {
         "url": "labs/delete/<str:pk>",
@@ -105,6 +111,41 @@ routes = [
         "url": "labs/ativar/<str:pk>",
         "methods": ["PUT"],
         "authorization": "Bearer (token)",
+    },
+    {
+        "url": "reslabs/",
+        "methods": ["GET"],
+        "authorization": "Bearer (token)"
+    },
+    {
+        "url": "reslabs/create",
+        "methods": ["POST"],
+        "authorization": "Bearer (token)",
+        "body": {
+            "lab_id": "int",
+            "user_id": "int",
+            "res_date": "timestamptz"
+            }
+    },
+    {
+        "url": "reslabs/read/<str:pk>",
+        "methods": ["GET"],
+        "authorization": "Bearer (token)"
+    },
+    {
+        "url": "reslabs/update/<str:pk>",
+        "methods": ["PUT"],
+        "authorization": "Bearer (token)",
+        "body": {
+            "lab_id": "int",
+            "user_id": "int",
+            "res_date": "timestamptz"
+            }
+    },
+    {
+        "url": "reslabs/delete/<str:pk>",
+        "methods": ["DELETE"],
+        "authorization": "Bearer (token)"
     }
 ]
 
