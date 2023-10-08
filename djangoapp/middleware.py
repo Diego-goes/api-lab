@@ -3,22 +3,8 @@ from rest_framework.exceptions import AuthenticationFailed
 from django.http import JsonResponse
 from django.conf import settings
 from .models import User
+from utils.utils_jwt import decode_token, get_token
 
-def decode_token(token):
-    secret_key = settings.SIMPLE_JWT["SIGNING_KEY"]
-    algorithm = settings.SIMPLE_JWT["ALGORITHM"]
-    try:
-        payload = jwt.decode(token, secret_key, algorithms=[algorithm])
-        return payload
-    except jwt.ExpiredSignatureError:
-        return None
-    except jwt.DecodeError:
-        return None
-
-def get_token(header):
-    token = header.split("Bearer ")[1]
-    token = token.replace('"', "")
-    return token
 
 class JWTAuthenticationMiddleware:
     def __init__(self, get_response):

@@ -5,33 +5,7 @@ from rest_framework import status
 from ..models import User
 from django.conf import settings
 from datetime import datetime, timedelta
-
-
-# from rest_framework_simplejwt.tokens import RefreshToken
-import jwt
-
-
-def gera_token(user):
-    exp_timestamp = datetime.now() + timedelta(days=7)
-    # Defina as informações que deseja incluir no payload (carga útil) do JWT
-    payload = {
-        'user_id': user.id,
-        'username': user.name,
-        'user_type_id': user.user_type_id,
-        'exp': exp_timestamp
-        # Outras informações personalizadas podem ser adicionadas aqui
-    }
-
-    # Acesse a chave secreta e o algoritmo diretamente de settings
-    secret_key = settings.SIMPLE_JWT["SIGNING_KEY"]
-    algorithm = settings.SIMPLE_JWT["ALGORITHM"]  # Supondo que você tenha definido JWT_ALGORITHM em settings.py
-
-    # Gere o token JWT
-    token = jwt.encode(payload, secret_key, algorithm=algorithm)
-
-    # Retorna o token como uma resposta JSON
-    return token
-
+from utils.utils_jwt import gera_token
 
 
 @api_view(["POST"])

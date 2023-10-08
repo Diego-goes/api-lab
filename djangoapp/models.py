@@ -24,6 +24,6 @@ class Lab(models.Model):
 
 
 class ResLab(models.Model):
-    id_user = models.ForeignKey(User, on_delete=models.CASCADE, default = 0)
-    id_lab = models.ForeignKey(Lab, on_delete=models.CASCADE, default = 0)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, default = 0)
+    lab_id = models.ForeignKey(Lab, on_delete=models.CASCADE, default = 0)
     res_date = models.DateTimeField(default=datetime.now)

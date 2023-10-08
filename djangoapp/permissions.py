@@ -31,7 +31,6 @@ class Cadastrado(permissions.BasePermission):
         if hasattr(request, 'auth_payload') and request.auth_payload:
             return True
         return False
-from rest_framework import permissions
 
 class IsProfessorOrAdmin(permissions.BasePermission):
     def has_permission(self, request, view):
