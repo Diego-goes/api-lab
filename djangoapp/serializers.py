@@ -1,22 +1,22 @@
 from rest_framework import serializers
-from .models import User, Lab, ResLab
+from .models import User, Lab, Res_Lab
 
 
-class UserSerializer(serializers.ModelSerializer):
+class User_Serializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = "__all__"
 
 
-class LabSerializer(serializers.ModelSerializer):
+class Lab_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Lab
         fields = "__all__"
 
 
-class ResLabSerializer(serializers.ModelSerializer):
+class Res_Lab_Serializer(serializers.ModelSerializer):
     user_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all()) 
     lab_id = serializers.PrimaryKeyRelatedField(queryset=Lab.objects.all()) 
     class Meta:
-        model = ResLab
+        model = Res_Lab
         fields = "__all__"

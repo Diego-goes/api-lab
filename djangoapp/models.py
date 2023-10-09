@@ -23,7 +23,7 @@ class Lab(models.Model):
     description = models.TextField()
 
 
-class ResLab(models.Model):
+class Res_Lab(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, default = 0)
     lab_id = models.ForeignKey(Lab, on_delete=models.CASCADE, default = 0)
     res_date = models.DateTimeField(default=datetime.now)

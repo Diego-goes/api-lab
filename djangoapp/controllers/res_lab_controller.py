@@ -1,32 +1,24 @@
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes
-from ..permissions import Cadastrado
-from ..models import ResLab
-from ..serializers import ResLabSerializer
+from ..models import Res_Lab
+from ..serializers import Res_Lab_Serializer
 from utils.funcs_gerais import gerar_code_pay,byte_to_dict
 from utils.api_requests import requisicao_api
 
-
-@api_view(["GET"])
-@permission_classes([Cadastrado])
-def getData(request):
-    resLab = ResLab.objects.all()
-    serializer = ResLabSerializer(resLab, many=True)
+def get_all_res_lab(request):
+    res_lab = Res_Lab.objects.all()
+    serializer = Res_Lab_Serializer(res_lab, many=True)
     return Response(serializer.data)
 
 
-@api_view(["GET"])
-@permission_classes([Cadastrado])
-def getResLab(request, pk):
-    resLab = ResLab.objects.get(id=pk)
-    serializer = ResLabSerializer(resLab, many=False)
+def get_res_lab(request, pk):
+    res_lab = Res_Lab.objects.get(id=pk)
+    serializer = Res_Lab_Serializer(res_lab, many=False)
     return Response(serializer.data)
 
 
-@api_view(["POST"])
-@permission_classes([Cadastrado])
-def addResLab(request):
-    serializer = ResLabSerializer(data=request.data)
+
+def add_res_Lab(request):
+    serializer = Res_Lab_Serializer(data=request.data)
     if serializer.is_valid():
         code_pay = gerar_code_pay()
         url = 'https://api-go-wash-efc9c9582687.herokuapp.com/api/pay-boleto'
@@ -41,7 +33,6 @@ def addResLab(request):
             "user_id": request.data["user_id"]
         }
         content = byte_to_dict(requisicao_api(url, headers, body)._content)
-        print(content)
         if 'data' in content and content['data']['status'] == 'approved':
             serializer.save()
         elif 'errors' in content:
@@ -55,19 +46,17 @@ def addResLab(request):
     return Response(serializer.data)
 
 
-@api_view(["PUT"])
-@permission_classes([Cadastrado])
-def updateResLab(request, pk):
-    lab = ResLab.objects.get(id=pk)
-    serializer = ResLabSerializer(instance=lab, data=request.data)
+
+def update_res_lab(request, pk):
+    lab = Res_Lab.objects.get(id=pk)
+    serializer = Res_Lab_Serializer(instance=lab, data=request.data)
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)
 
 
-@api_view(["DELETE"])
-@permission_classes([Cadastrado])
-def deleteResLab(request, pk):
-    lab = ResLab.objects.get(id=pk)
+
+def delete_res_lab(request, pk):
+    lab = Res_Lab.objects.get(id=pk)
     lab.delete()
-    return Response("ResLab deletado com sucesso!")
+    return Response("Res_Lab deletado com sucesso!")
