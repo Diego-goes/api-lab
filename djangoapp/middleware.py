@@ -16,10 +16,10 @@ class JWTAuthenticationMiddleware:
             token = get_token(authorization_header)
             if token:
                 payload = decode_token(token)
-                if payload:
+                try:
                     request.auth_payload = payload
                     request.user = User.objects.get(id=payload["user_id"])
-                else:
+                except:
                     error_message = "Token invalido ou expirado."
                     return JsonResponse({"error": error_message}, status=401)
 
