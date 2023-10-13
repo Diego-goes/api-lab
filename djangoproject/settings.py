@@ -22,7 +22,7 @@ import rest_framework_simplejwt
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY","$+p%17b-¨KMcy_F&¨hLhL_BR3U%21J!cbRwe3npYZ7(9+bH¨bqcQQ9!OALKC")
+SECRET_KEY = os.getenv("SECRET_KEY","CHANGE_ME")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.getenv("DEBUG", 0)))
@@ -100,9 +100,6 @@ DATABASES = {
 AUTH_USER_MODEL = 'djangoapp.User'
 
 AUTH_PASSWORD_VALIDATORS = [
-    # {
-    #     "NAME": "django.contrib.auth.backends.ModelBackend",
-    # },
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
