@@ -6,9 +6,13 @@ Certifique-se de ter as seguintes ferramentas instaladas no seu sistema:
 
 - Python installed 
 - Docker installed and running
-- Django 3.2.5
-- DjangoRestFramework 3.12.4
-- Psycopg2-binary 2.9.1
+- Django==3.2.5
+- psycopg2-binary==2.9.1
+- djangorestframework==3.12.4
+- djangorestframework-simplejwt==5.3.0
+- PyJWT==2.8.0
+- requests==2.31.0
+- urllib3==1.26.12
 
 (Opcional): Postman e Tableplus para testes.
 
@@ -37,9 +41,12 @@ Isso iniciará os contêineres Docker para o seu projeto Django e suas dependên
 
 Rotas configuradas da API:
 
+Exibir rotas:
+http://localhost:8000/
+
 CRUD User:
 - Rota para ver usuários: 
-http://localhost:8000/users/
+http://localhost:8000/users
 - Rota para registrar novos usuários: 
 http://localhost:8000/users/create
 - Rota para exibir os dados de um usuário: 
@@ -55,7 +62,7 @@ http://localhost:8000/users/inativar/id
 
 CRUD Lab:
 - Rota para ver laboratórios: 
-http://localhost:8000/labs/
+http://localhost:8000/labs
 - Rota para registrar novos laboratórios: 
 http://localhost:8000/labs/create
 - Rota para exibir os dados de um laboratório: 
@@ -71,7 +78,7 @@ http://localhost:8000/labs/inativar/id
 
 Rota de Reservar Laboratório:
 - Rota para ver reservas: 
-http://localhost:8000/reslabs/
+http://localhost:8000/reslabs
 - Rota para registrar novas reservas: 
 http://localhost:8000/reslabs/create
 - Rota para exibir os dados de uma reserva: 
@@ -82,7 +89,7 @@ http://localhost:8000/reslabs/update/id
 http://localhost:8000/reslabs/delete/id
 
 Rota de login:
-http://localhost:8000/login/
+http://localhost:8000/login
 
 Aceita um JSON seguindo o modelo:
     {
