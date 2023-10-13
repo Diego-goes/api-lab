@@ -21,13 +21,13 @@ def add_lab_view(request):
     return labs_controller.add_lab(request)
 
 
-@api_view(["POST"])
+@api_view(["PUT"])
 @permission_classes([IsProfessorOrAdmin])
 def inativar_lab_view(request, pk):
     return labs_controller.inativar_lab(request, pk)
 
 
-@api_view(["POST"])
+@api_view(["PUT"])
 @permission_classes([IsProfessorOrAdmin])
 def ativar_lab_view(request, pk):
     return labs_controller.ativar_lab(request, pk)

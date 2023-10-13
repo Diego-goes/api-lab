@@ -18,12 +18,12 @@ def get_user_view(request, pk):
 def add_user_view(request):
    return users_controller.add_user(request)
 
-@api_view(["POST"])
+@api_view(["PUT"])
 @permission_classes([PodeEditarPerfil])
 def inativar_user_view(request, pk):
    return users_controller.inativar_user(request,pk)
 
-@api_view(["POST"])
+@api_view(["PUT"])
 @permission_classes([Admin])
 def ativar_user_view(request, pk):
    return users_controller.ativar_user(request,pk)

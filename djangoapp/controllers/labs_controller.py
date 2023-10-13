@@ -1,6 +1,7 @@
 from rest_framework.response import Response
 from ..models import Lab
 from ..serializers import Lab_Serializer
+from rest_framework import status
 
 
 def get_all_labs(request):
@@ -21,14 +22,9 @@ def add_lab(request):
     dados = request.data
     if "andar" in dados and "lab" in dados:
         andar = dados["andar"]
-        lab = dados["lab"]
 
-        try:
-            if Lab.objects.filter(andar=andar).exists():
-                return Response({f"O Lab tem já está registrado no andar {andar}."})
-            
-        except Lab.DoesNotExist:
-            return Response({"Laboratório não encontrado."})
+        if Lab.objects.filter(andar=andar).exists():
+            return Response({f"Já existe um laboratório registrado no andar {andar}, escolha um outro andar."})
 
         serializer = Lab_Serializer(data=request.data)
         if serializer.is_valid():
@@ -44,11 +40,11 @@ def inativar_lab(request, pk):
         if lab.is_active == 1:
             lab.is_active = 0
             lab.save()
-            return Response({f"Lab inativado com sucesso!"})
+            return Response({f"Laboratório {pk} inativado com sucesso!"})
         else:
-            return Response({f"Lab ja estava inativado!"})
+            return Response({f"Laboratório {pk} ja estava inativado!"})
     except Lab.DoesNotExist:
-        return Response({"Laboratório não encontrado"})
+        return Response({f"Laboratório {pk} não encontrado"})
 
 
 
@@ -58,26 +54,35 @@ def ativar_lab(request, pk):
         if lab.is_active == 0:
             lab.is_active = 1
             lab.save()
-            return Response({"Lab ativado com sucesso!"})
+            return Response({f"Laboratório {pk} ativado com sucesso!"})
         else:
-            return Response({"Lab ja estava ativado!"})
+            return Response({f"Laboratório {pk} ja estava ativado!"})
     except Lab.DoesNotExist:
-        return Response({"Laboratório não encontrado"})
+        return Response({f"Laboratório {pk} não encontrado"})
 
 
 
-def update_lab(request, pk):
-    lab = Lab.objects.get(id=pk)
-    serializer = Lab_Serializer(instance=lab, data=request.data)
+def update_lab(request, pk):    
+    try:
+        lab = Lab.objects.get(id=pk)
+        serializer = Lab_Serializer(instance=lab, data=request.data)
+        if lab.is_active == 1:
+            lab.save()
+            if serializer.is_valid():
+                serializer.save()
+            return Response({'Mensagem': f'Laboratório {pk} ativado com sucesso!', 'body': serializer.data}, status=status.HTTP_202_ACCEPTED)
+        else:
+            return Response({'Mensagem': f'Não foi possível concluir ação, pois o laboratório {pk} se encontra inativo.', 'body': serializer.data}, status=status.HTTP_202_ACCEPTED)
+    except Lab.DoesNotExist:
+        return Response({f"Laboratório {pk} não encontrado"})
 
-    if serializer.is_valid():
-        serializer.save()
-
-    return Response(serializer.data)
 
 
 
 def delete_lab(request, pk):
-    lab = Lab.objects.get(id=pk)
-    lab.delete()
-    return Response("Lab successfully deleted!")
+    try:
+        lab = Lab.objects.get(id=pk)
+        lab.delete()
+        return Response(f"Laboratório {pk} deletado com sucesso!")
+    except lab.DoesNotExist:
+        return Response({f"Laboratório {pk} não encontrado"})

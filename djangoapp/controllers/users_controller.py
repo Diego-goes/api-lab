@@ -18,7 +18,7 @@ def get_user(request, pk):
         serializer = User_Serializer(user, many=False)
         return Response(serializer.data)
     except User.DoesNotExist:
-        return Response({"message": "Usuário não encontrado"}, status=404)  # Retorna uma resposta de erro com status 404
+        return Response({"message": f"Usuário {pk} não encontrado"}, status=404)  # Retorna uma resposta de erro com status 404
 
 
 def add_user(request):
@@ -36,11 +36,11 @@ def inativar_user(request, pk):
         if user.is_active == 1:
             user.is_active = 0
             user.save()
-            return Response({"message": "Usuário inativado com sucesso!"})
+            return Response({"message": f"Usuário {pk} inativado com sucesso!"})
         else:
-            return Response({"message": "Usuário já estava inativado!"})
+            return Response({"message": f"Usuário {pk} já estava inativado!"})
     except User.DoesNotExist:
-        return Response({"message": "Usuário não encontrado"}, status=404)  # Retorna uma resposta de erro com status 404
+        return Response({"message": f"Usuário {pk} não encontrado"}, status=404)  # Retorna uma resposta de erro com status 404
 
 
 def ativar_user(request, pk):
@@ -49,11 +49,11 @@ def ativar_user(request, pk):
         if user.is_active == 0:
             user.is_active = 1
             user.save()
-            return Response({"message": "Usuário ativado com sucesso!"})
+            return Response({"message": f"Usuário {pk} ativado com sucesso!"})
         else:
-            return Response({"message": "Usuário já estava ativado!"})
+            return Response({"message": f"Usuário {pk} já estava ativado!"})
     except User.DoesNotExist:
-        return Response({"message": "Usuário não encontrado"}, status=404)  # Retorna uma resposta de erro com status 404
+        return Response({"message": f"Usuário {pk} não encontrado"}, status=404)  # Retorna uma resposta de erro com status 404
 
 
 def update_user(request, pk):
@@ -62,15 +62,16 @@ def update_user(request, pk):
         serializer = User_Serializer(instance=user, data=request.data)
         if serializer.is_valid():
             serializer.save()
-        return Response(serializer.data)
+        return Response({"mensagem": f"Usuário {pk} atualizado com sucesso.", f"reserva{pk}": serializer.data})
+    
     except User.DoesNotExist:
-        return Response({"message": "Usuário não encontrado"}, status=404)  # Retorna uma resposta de erro com status 404
+        return Response({"message": f"Usuário {pk} não encontrado"}, status=404)  # Retorna uma resposta de erro com status 404
 
 
 def delete_user(request, pk):
     try:
         user = User.objects.get(id=pk)
         user.delete()
-        return Response("Usuário successfully deleted!")
+        return Response({"message": f"Usuário {pk} deletado com sucesso!"}, status=200)
     except User.DoesNotExist:
-        return Response({"message": "Usuário não encontrado"}, status=404)  # Retorna uma resposta de erro com status 404
+        return Response({"message": f"Usuário {pk} não encontrado"}, status=404)  # Retorna uma resposta de erro com status 404
