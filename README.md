@@ -1,4 +1,4 @@
-# Sistema de Reservas Laboratorial
+# Sistema de Reservas Laboratoriais
 
 ## Pré-requisitos
 
