@@ -42,7 +42,7 @@ Isso iniciará os contêineres Docker para o seu projeto Django e suas dependên
 Rotas configuradas da API:
 
 Exibir rotas:
-http://localhost:8000/
+- http://localhost:8000/
 
 CRUD User:
 - Rota para ver usuários: 
@@ -89,7 +89,7 @@ http://localhost:8000/reslabs/update/id
 http://localhost:8000/reslabs/delete/id
 
 Rota de login:
-http://localhost:8000/login
+- http://localhost:8000/login
 
 Aceita um JSON seguindo o modelo:
     {
