@@ -30,7 +30,7 @@ Certifique-se de ter as seguintes ferramentas instaladas no seu sistema:
 
 ## Executando o Projeto
 
-1. Execute o seguinte comando para iniciar o projeto:
+1. Execute o seguinte comando na raiz do projeto para iniciar:
 
     ```bash
     reload.bat
