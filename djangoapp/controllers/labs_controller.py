@@ -66,13 +66,9 @@ def update_lab(request, pk):
     try:
         lab = Lab.objects.get(id=pk)
         serializer = Lab_Serializer(instance=lab, data=request.data)
-        if lab.is_active == 1:
-            lab.save()
-            if serializer.is_valid():
-                serializer.save()
-            return Response({'Mensagem': f'Laboratório {pk} ativado com sucesso!', 'body': serializer.data}, status=status.HTTP_202_ACCEPTED)
-        else:
-            return Response({'Mensagem': f'Não foi possível concluir ação, pois o laboratório {pk} se encontra inativo.', 'body': serializer.data}, status=status.HTTP_202_ACCEPTED)
+        if serializer.is_valid():
+            serializer.save()
+        return Response({'Mensagem': f'Laboratório {pk} atualizado com sucesso!', 'body': serializer.data}, status=status.HTTP_202_ACCEPTED)
     except Lab.DoesNotExist:
         return Response({f"Laboratório {pk} não encontrado"})
 
