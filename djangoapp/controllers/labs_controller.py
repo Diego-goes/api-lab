@@ -12,9 +12,12 @@ def get_all_labs(request):
 
 
 def get_lab(request, pk):
-    labs = Lab.objects.get(id=pk)
-    serializer = Lab_Serializer(labs, many=False)
-    return Response(serializer.data)
+    try:
+        labs = Lab.objects.get(id=pk)
+        serializer = Lab_Serializer(labs, many=False)
+        return Response(serializer.data)
+    except Lab.DoesNotExist:
+        return Response({f"Laboratório {pk} não encontrado"})
 
 
 
@@ -80,5 +83,5 @@ def delete_lab(request, pk):
         lab = Lab.objects.get(id=pk)
         lab.delete()
         return Response(f"Laboratório {pk} deletado com sucesso!")
-    except lab.DoesNotExist:
+    except Lab.DoesNotExist:
         return Response({f"Laboratório {pk} não encontrado"})

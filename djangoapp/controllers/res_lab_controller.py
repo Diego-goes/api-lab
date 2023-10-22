@@ -142,7 +142,7 @@ def delete_res_lab(request, pk):
     try:
         res_lab = Res_Lab.objects.get(id=pk)
     except Res_Lab.DoesNotExist:
-        return Response({"message": f"Não foi possível concluir ação, pois a reserva {id} não existe."})
+        return Response({"message": f"Não foi possível concluir ação, pois a reserva {pk} não existe."})
 
     res_lab.delete()
     return Response({'message': 'Res_Lab deletado com sucesso!'})
