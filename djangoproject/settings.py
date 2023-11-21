@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "djangoapp",
     "rest_framework",
     "rest_framework_simplejwt",
+    "corsheaders"
 ]
 
 MIDDLEWARE = [
@@ -57,6 +58,14 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "djangoapp.middleware.JWTAuthenticationMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+]
+
+CORS_ALLOW_ALL_ORIGINS = False
+
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:5500",
+    "http://localhost:8080"
 ]
 
 ROOT_URLCONF = "djangoproject.urls"
