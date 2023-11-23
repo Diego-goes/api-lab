@@ -13,7 +13,7 @@ class User(AbstractBaseUser):
     )  # Use um campo apropriado para senhas, como PasswordField em produção
     is_active = models.IntegerField(default=0)
     cpf_cnpj = models.CharField(max_length=14, unique=True)
-    phone = models.CharField(max_length=10)
+    phone = models.CharField(max_length=11)
     USERNAME_FIELD = 'username'
 
 class Lab(models.Model):
