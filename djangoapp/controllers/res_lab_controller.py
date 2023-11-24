@@ -61,7 +61,7 @@ def get_res_lab(request, pk):
         serializer = Res_Lab_Serializer(res_lab, many=False)
         return Response(serializer.data)
     except Res_Lab.DoesNotExist:
-        return Response({"message": f"Não foi possível concluir a ação, reserva {pk} não encontrada."})
+        return Response({"message": f"Não foi possível concluir a ação, reserva {pk} não encontrada."}, status=status.HTTP_400_BAD_REQUEST)
 
 
 def add_res_Lab(request):
@@ -72,7 +72,7 @@ def add_res_Lab(request):
         lab_response = lab_existe(dados["lab_id"])
         date_response = validacoes_gerais_hr(dados["res_date"])
     except:
-        return Response({"mensagem": "Não foi possível concluir a ação, existem campos faltando."})
+        return Response({"mensagem": "Não foi possível concluir a ação, existem campos faltando."}, status=status.HTTP_400_BAD_REQUEST)
     if user_response or lab_response or date_response:
         return user_response or lab_response or date_response
     if not serializer.is_valid():
@@ -85,7 +85,7 @@ def add_res_Lab(request):
         return Response({
             'Mensagem': 'Não foi possível concluir a ação, horário da reserva ausente.',
             'body': f'{serializer.data}',
-        })
+        }, status=status.HTTP_400_BAD_REQUEST)
     res_date = dados['res_date']
     response = validacoes_gerais_hr(res_date)
 
@@ -93,9 +93,9 @@ def add_res_Lab(request):
         return response
     
     if laboratorio_inativo(dados['lab_id']):
-        return Response({'Mensagem': f"Não foi possível concluir ação, pois o laboratório {dados['lab_id']} se encontra inativo.", 'body': serializer.data}, status=status.HTTP_202_ACCEPTED)
+        return Response({'Mensagem': f"Não foi possível concluir ação, pois o laboratório {dados['lab_id']} se encontra inativo.", 'body': serializer.data}, status=status.HTTP_400_BAD_REQUEST)
     if user_inativo(dados['user_id']):
-        return Response({'Mensagem': f"Não foi possível concluir ação, pois o usuário {dados['user_id']} se encontra inativo.", 'body': serializer.data}, status=status.HTTP_202_ACCEPTED)
+        return Response({'Mensagem': f"Não foi possível concluir ação, pois o usuário {dados['user_id']} se encontra inativo.", 'body': serializer.data}, status=status.HTTP_400_BAD_REQUEST)
 
     code_pay = gerar_code_pay()
     status_pay = confirmar_pagamento(code_pay, dados["user_id"])
@@ -112,13 +112,13 @@ def update_res_lab(request, pk):
     try:
         res_lab = Res_Lab.objects.get(id=pk)
     except Res_Lab.DoesNotExist:
-        return Response({"message": f"Não foi possível concluir a ação, reserva {pk} não encontrada."})
+        return Response({"message": f"Não foi possível concluir a ação, reserva {pk} não encontrada."}, status=status.HTTP_400_BAD_REQUEST)
     try:
         user_response = user_existe(dados["user_id"])
         lab_response = lab_existe(dados["lab_id"])
         date_response = validacoes_gerais_hr(dados["res_date"])
     except:
-        return Response({"mensagem": "Não foi possível concluir a ação, existem campos faltando."})
+        return Response({"mensagem": "Não foi possível concluir a ação, existem campos faltando."}, status=status.HTTP_400_BAD_REQUEST)
 
     if user_response or lab_response or date_response:
         return user_response or lab_response or date_response
@@ -128,13 +128,13 @@ def update_res_lab(request, pk):
 
     if serializer.is_valid():
         if laboratorio_inativo(dados['lab_id']):
-                return Response({'Mensagem': f"Não foi possível concluir ação, pois o laboratório {dados['lab_id']} se encontra inativo.", 'body': serializer.data}, status=status.HTTP_202_ACCEPTED)
+                return Response({'Mensagem': f"Não foi possível concluir ação, pois o laboratório {dados['lab_id']} se encontra inativo.", 'body': serializer.data}, status=status.HTTP_400_BAD_REQUEST)
         if user_inativo(dados['user_id']):
-            return Response({'Mensagem': f"Não foi possível concluir ação, pois o usuário {dados['user_id']} se encontra inativo.", 'body': serializer.data}, status=status.HTTP_202_ACCEPTED)
+            return Response({'Mensagem': f"Não foi possível concluir ação, pois o usuário {dados['user_id']} se encontra inativo.", 'body': serializer.data}, status=status.HTTP_400_BAD_REQUEST)
         serializer.save()
         return Response({"mensagem": f"Reserva {pk} atualizada com sucesso.", f"reserva{pk}": serializer.data})
     else:
-        return Response({"mensagem": "Não foi possível concluir a ação, existem campos faltando."})
+        return Response({"mensagem": "Não foi possível concluir a ação, existem campos faltando."}, status=status.HTTP_400_BAD_REQUEST)
     
 
 
@@ -142,7 +142,7 @@ def delete_res_lab(request, pk):
     try:
         res_lab = Res_Lab.objects.get(id=pk)
     except Res_Lab.DoesNotExist:
-        return Response({"message": f"Não foi possível concluir ação, pois a reserva {pk} não existe."})
+        return Response({"message": f"Não foi possível concluir ação, pois a reserva {pk} não existe."}, status=status.HTTP_400_BAD_REQUEST)
 
     res_lab.delete()
     return Response({'message': 'Res_Lab deletado com sucesso!'})
