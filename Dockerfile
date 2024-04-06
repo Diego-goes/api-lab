@@ -12,9 +12,10 @@ RUN pip install -r requirements.txt
 
 # Bundle app source
 COPY . .
+# RUN chmod +x /app/django.sh
 
 # Expose port
 EXPOSE 8000
 
 # entrypoint to run the django.sh file
-ENTRYPOINT ["/app/django.sh"]
+# ENTRYPOINT ["/app/django.sh"]
